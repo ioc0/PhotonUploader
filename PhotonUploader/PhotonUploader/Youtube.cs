@@ -13,20 +13,20 @@ namespace PhotonUploader
 {
     class Youtube
     {
-        public static string UploadVideo(string FilePath, string Title, string Description)
+        public string UploadVideo(string FilePath, string login, string pass)
         {
             YouTubeRequestSettings settings;
             YouTubeRequest request;
-            string devkey = "YOUR DEVELOPPER KEY HERE";
-            string username = "Your Youtube Username";
-            string password = "Your Youtube Password";
+            string devkey = "AIzaSyBpnMoS7u_tT8HISPsj44tMYcs2c_JZnHs";
+            string username = login;
+            string password = pass;
             settings = new YouTubeRequestSettings("Your Application Name", devkey, username, password) { Timeout = -1 };
             request = new YouTubeRequest(settings);
 
             Video newVideo = new Video();
 
-            newVideo.Title = Title;
-            newVideo.Description = Description;
+            newVideo.Title = "Test";
+            newVideo.Description = "Test Description";
             newVideo.Private = true;
             newVideo.YouTubeEntry.Private = false;
 
@@ -40,6 +40,7 @@ namespace PhotonUploader
             // newVideo.YouTubeEntry.setYouTubeExtension("location", "Paris, France.");
 
             newVideo.YouTubeEntry.MediaSource = new MediaFileSource(FilePath, "video/mp4");
+            
             Video createdVideo = request.Upload(newVideo);
 
             return createdVideo.VideoId;
